@@ -24,7 +24,7 @@ jobs:
         with:
           php-version: '8.1'
           extensions: openssl, mbstring
-          tools: phpcs, phpstan
+          tools: phpcs
 
       - name: Validate PHP syntax (cpp/index.php)
         run: php -l cpp/index.php
@@ -32,24 +32,19 @@ jobs:
       - name: Validate PHP syntax (csharp/server/index.php)
         run: php -l csharp/server/index.php
 
-      - name: Run PHP CodeSniffer (optional)
+      - name: Run PHP CodeSniffer
         run: |
           phpcs --standard=PSR12 cpp/index.php || true
           phpcs --standard=PSR12 csharp/server/index.php || true
 
-  # Job 2: .NET Build
+  # Job 2: .NET Framework Build (Windows with MSBuild)
   dotnet-build:
-    name: .NET Build
+    name: .NET Framework Build
     runs-on: windows-latest
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '4.8.x'
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v2
@@ -58,10 +53,20 @@ jobs:
         run: nuget restore csharp/client/harmony-ssl-hook.sln
 
       - name: Build Solution (Debug)
-        run: msbuild csharp/client/harmony-ssl-hook.sln /p:Configuration=Debug /p:Platform="Any CPU"
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
+            csharp/client/harmony-ssl-hook.sln `
+            /p:Configuration=Debug `
+            /p:Platform="Any CPU" `
+            /p:VisualStudioVersion=17.0
 
       - name: Build Solution (Release)
-        run: msbuild csharp/client/harmony-ssl-hook.sln /p:Configuration=Release /p:Platform="Any CPU"
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
+            csharp/client/harmony-ssl-hook.sln `
+            /p:Configuration=Release `
+            /p:Platform="Any CPU" `
+            /p:VisualStudioVersion=17.0
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
