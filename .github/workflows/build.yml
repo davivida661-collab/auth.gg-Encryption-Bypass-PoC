@@ -53,20 +53,10 @@ jobs:
         run: nuget restore csharp/client/harmony-ssl-hook.sln
 
       - name: Build Solution (Debug)
-        run: |
-          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
-            csharp/client/harmony-ssl-hook.sln `
-            /p:Configuration=Debug `
-            /p:Platform="Any CPU" `
-            /p:VisualStudioVersion=17.0
+        run: '& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "csharp/client/harmony-ssl-hook.sln" /p:Configuration=Debug /p:Platform="Any CPU" /p:VisualStudioVersion=17.0'
 
       - name: Build Solution (Release)
-        run: |
-          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
-            csharp/client/harmony-ssl-hook.sln `
-            /p:Configuration=Release `
-            /p:Platform="Any CPU" `
-            /p:VisualStudioVersion=17.0
+        run: '& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "csharp/client/harmony-ssl-hook.sln" /p:Configuration=Release /p:Platform="Any CPU" /p:VisualStudioVersion=17.0'
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
