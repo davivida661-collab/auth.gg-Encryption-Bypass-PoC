@@ -17,7 +17,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -44,13 +44,13 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       - name: Setup NuGet
-        uses: NuGet/setup-nuget@v2
+        uses: NuGet/setup-nuget@v3
 
       - name: Restore NuGet packages
         run: nuget restore csharp/client/harmony-ssl-hook.sln
@@ -62,11 +62,12 @@ jobs:
         run: msbuild csharp/client/harmony-ssl-hook.sln /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: harmony-ssl-hook-build
-          path: csharp/client/bin/Release/
+          path: csharp/client/harmony-ssl-hook/bin/Release/
           retention-days: 30
+          if-no-files-found: warn
 
   # Job 3: Documentation Validation
   docs:
@@ -75,7 +76,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Check README exists
         run: |
@@ -116,7 +117,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Check for hardcoded secrets
         run: |
