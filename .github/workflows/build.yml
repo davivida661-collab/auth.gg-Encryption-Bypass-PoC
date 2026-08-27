@@ -46,6 +46,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v2
 
@@ -53,10 +56,10 @@ jobs:
         run: nuget restore csharp/client/harmony-ssl-hook.sln
 
       - name: Build Solution (Debug)
-        run: '& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "csharp/client/harmony-ssl-hook.sln" /p:Configuration=Debug /p:Platform="Any CPU" /p:VisualStudioVersion=17.0'
+        run: msbuild csharp/client/harmony-ssl-hook.sln /p:Configuration=Debug /p:Platform="Any CPU"
 
       - name: Build Solution (Release)
-        run: '& "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "csharp/client/harmony-ssl-hook.sln" /p:Configuration=Release /p:Platform="Any CPU" /p:VisualStudioVersion=17.0'
+        run: msbuild csharp/client/harmony-ssl-hook.sln /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
