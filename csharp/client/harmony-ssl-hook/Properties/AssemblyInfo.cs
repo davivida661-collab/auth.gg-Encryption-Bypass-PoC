@@ -1,21 +1,21 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("harmony-ssl-hook")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Harmony SSL Hook")]
+[assembly: AssemblyDescription("Auth.GG Encryption Bypass Tool - SSL Certificate Hook")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("{11c52436-208a-33b1-19ed-33df38073724}")]
-[assembly: AssemblyProduct("harmony-ssl-hook")]
-[assembly: AssemblyCopyright("Copyright © {11c52436-208a-33b1-19ed-33df38073724} 2023")]
+[assembly: AssemblyCompany("KeyAuth")]
+[assembly: AssemblyProduct("Harmony SSL Hook")]
+[assembly: AssemblyCopyright("Copyright © KeyAuth 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
+// to COM components. If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
